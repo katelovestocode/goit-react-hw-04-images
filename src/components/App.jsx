@@ -1,14 +1,9 @@
 import { Component } from 'react';
 import SearchBar from './SearchBar/SearchBar';
 // import ImageGallery from "./ImageGallery/ImageGallery"
-import {
-  ImageGalleryItem,
-  ImageGalleryItemImage,
-  Button,
-} from './App.styled';
+import { Button} from './App.styled';
 import { fetchImages } from './utils/fetchImages';
 import { Loader } from './Loader/Loader';
-import Modal from "./Modal/Modal"
 import { ImageGallery } from './ImageGallery/ImageGallery';
 
 
