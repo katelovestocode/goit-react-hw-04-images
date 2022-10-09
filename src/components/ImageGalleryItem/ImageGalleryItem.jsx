@@ -1,6 +1,8 @@
 import { Component } from 'react';
+import { Modal } from "../Modal/Modal"
+import PropTypes from 'prop-types';
 import { ImageGalleryItemCard, ImageGalleryItemImage } from "./ImageGalleryItem.styled"
-import {Modal} from "../Modal/Modal"
+
 
 export default class ImageGalleryItem extends Component  {
 
@@ -8,9 +10,9 @@ export default class ImageGalleryItem extends Component  {
         showModal: false,
     }
 
+// switching modal on and off
     toggleModal = () => {
         this.setState(({ showModal }) => ({ showModal: !showModal }))
-        // setTimeout(()=> {console.log(this.state.showModal)}, 3000)
   }
   
 
@@ -18,8 +20,7 @@ export default class ImageGalleryItem extends Component  {
       window.addEventListener("keydown", this.onEscapeClick)
      
     }
-
-     
+ 
   componentWillUnmount() {
       window.removeEventListener("keydown", this.onEscapeClick)
     
@@ -40,8 +41,7 @@ export default class ImageGalleryItem extends Component  {
         if (this.state.showModal) {
 
             if (event.currentTarget === event.target) {
-            this.toggleModal();
-        }
+            this.toggleModal();}
         }
    }
     
@@ -54,13 +54,18 @@ export default class ImageGalleryItem extends Component  {
             <ImageGalleryItemImage src={this.props.webformatURL} alt={this.props.tags} onClick={this.toggleModal} />
            
 
-                {this.state.showModal && (<Modal largeImageURL={this.props.largeImageURL}  tags={this.props.tags}
+            {this.state.showModal && (<Modal largeImageURL={this.props.largeImageURL}  tags={this.props.tags}
                             onBackdropClick={this.onBackdropClick} />)}
                     
             </ImageGalleryItemCard>
       
-        
             
         ) 
     }
 } 
+
+ImageGalleryItem.propTypes = {
+    largeImageURL: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
+}
+

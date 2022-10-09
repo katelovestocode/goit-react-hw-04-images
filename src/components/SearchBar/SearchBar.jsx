@@ -1,17 +1,20 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
+import { BiSearchAlt } from 'react-icons/bi';
 import {
   Searchbar,
   SearchForm,
   SearchFormButton,
   SearchFormInput,
 } from './SearchBar.styled';
-import { BiSearchAlt } from 'react-icons/bi';
+
 
 export default class SearchBar extends Component {
   state = {
     searchQuery: '',
   };
 
+  // SearchQuery onChange when typing in Input
   handleQueryChange = event => {
     this.setState({ searchQuery: event.currentTarget.value.toLowerCase() });
   };
@@ -50,4 +53,8 @@ export default class SearchBar extends Component {
       </Searchbar>
     );
   }
+}
+
+SearchBar.propTypes = {
+onSubmit: PropTypes.func.isRequired,
 }

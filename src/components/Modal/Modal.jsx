@@ -1,5 +1,6 @@
 
-import {Overlay, ModalWindow } from "./Modal.styled"
+import { Overlay, ModalWindow } from "./Modal.styled"
+import PropTypes from 'prop-types';
 
 
 export const Modal = ({largeImageURL, tags, onBackdropClick}) => { 
@@ -13,4 +14,9 @@ export const Modal = ({largeImageURL, tags, onBackdropClick}) => {
     )
 }
 
+Modal.propTypes = {
+tags: PropTypes.string.isRequired,
+largeImageURL: PropTypes.string.isRequired,
+onBackdropClick: PropTypes.func.isRequired, 
+}
 
