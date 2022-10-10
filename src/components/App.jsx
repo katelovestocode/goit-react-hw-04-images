@@ -30,7 +30,7 @@ export default class App extends Component {
 
     // check if newName or newPage not equal an old one then we are fettching new pictures
     if (prevName !== newName || prevPage !== newPage) {
-      this.setState({ isLoading: true});
+      this.setState({ isLoading: true });
 
       //  fetch(`https://pixabay.com/api/?key=29432108-cac2e2e1a5a7f25b3217a8a0e&image_type=photo&orientation=horizontal&safesearch=true&page=${this.state.page}&per_page=${12}&q=${newName}`)
 
@@ -44,21 +44,21 @@ export default class App extends Component {
         })
         .then(pictures => {
 
-          //const totalPages = Math.ceil(pictures.totalHits / 12);
           const itemsPerPage = pictures.hits.length;
           
           console.log(pictures)
-      
-          if (this.state.page === 1) {
-            this.setState(prevState => ({ pictures: [...pictures.hits], itemsPerPage: itemsPerPage, }))
-          }
-          else { this.setState(prevState => ({ pictures: [...prevState.pictures, ...pictures.hits], itemsPerPage: itemsPerPage, })) }
-        })
-        .catch(error => this.state.error)
-        .finally(() => this.setState({ isLoading: false }));
+         
+           // if (this.state.page === 1) {
+          //   this.setState(prevState => ({ pictures: [...pictures.hits], itemsPerPage: itemsPerPage, })) }
+          // else { this.setState(prevState => ({ pictures: [...prevState.pictures, ...pictures.hits], itemsPerPage: itemsPerPage, })) }
 
-    }
-  }
+          this.setState(prevState => (this.state.page === 1 ? { pictures: pictures.hits, itemsPerPage: itemsPerPage } : { pictures: [...prevState.pictures, ...pictures.hits], itemsPerPage: itemsPerPage, }
+          ))
+            .catch(error => this.state.error)
+            .finally(() => this.setState({ isLoading: false }));
+    
+   })}}
+  
 
 
   // setting searchQuery from the SearchBar and passing to the APP
