@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import { BiSearchAlt } from 'react-icons/bi';
 import {
@@ -9,32 +9,32 @@ import {
 } from './SearchBar.styled';
 
 
-export default class SearchBar extends Component {
-  state = {
-    searchQuery: '',
-  };
+export default function SearchBar ({onSubmit}) {
+
+  const [searchQuery, setsearchQuery] = useState("");
+  
 
   // SearchQuery onChange when typing in Input
-  handleQueryChange = event => {
-    this.setState({ searchQuery: event.currentTarget.value.toLowerCase() });
+  const handleQueryChange = event => {
+    
+    setsearchQuery(event.currentTarget.value.toLowerCase())
   };
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
-    if (this.state.searchQuery.trim() === '') {
+    if (searchQuery.trim() === '') {
       return;
     }
-
     // prop that goes to APP, passing current searchQuery to the APP
-    this.props.onSubmit(this.state.searchQuery);
+    onSubmit(searchQuery);
 
-    this.setState({ searchQuery: '' });
+    setsearchQuery("");
   };
-  render() {
+
     return (
       <Searchbar>
-        <SearchForm onSubmit={this.handleSubmit}>
+        <SearchForm onSubmit={handleSubmit}>
           <SearchFormButton type="submit">
             <BiSearchAlt />
           </SearchFormButton>
@@ -42,8 +42,8 @@ export default class SearchBar extends Component {
           <SearchFormInput
             className="input"
             name="searchQuery"
-            value={this.state.searchQuery}
-            onChange={this.handleQueryChange}
+            value={searchQuery}
+            onChange={handleQueryChange}
             type="text"
             autoComplete="off"
             autoFocus
@@ -53,7 +53,7 @@ export default class SearchBar extends Component {
       </Searchbar>
     );
   }
-}
+
 
 SearchBar.propTypes = {
 onSubmit: PropTypes.func.isRequired,
